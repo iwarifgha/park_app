@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:park_app/features/booking/state/booking_state_controller.dart';
 
 class BookingView extends StatelessWidget {
   static const name = '/booking';
-    BookingView({super.key});
+  BookingView({super.key});
 
-  final BookingStateController _bookingController = Get.put(BookingStateController());
+  final BookingStateController _bookingController =
+      Get.find<BookingStateController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,8 @@ class BookingView extends StatelessWidget {
             final booking = _bookingController.userBookings[index];
             return ListTile(
               title: Text("Price: \$${booking.price} - ${booking.status}"),
-              subtitle: Text("${booking.startTime.hour}:${booking.startTime.minute} - ${booking.endTime.hour}:${booking.endTime.minute}"),
+              subtitle: Text(
+                  "${booking.startTime.hour}:${booking.startTime.minute} - ${booking.endTime.hour}:${booking.endTime.minute}"),
             );
           },
         );
@@ -36,8 +37,3 @@ class BookingView extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

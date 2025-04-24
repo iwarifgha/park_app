@@ -1,0 +1,2 @@
+/home/iwarifgha/Projects/park_app/android/app/.cxx/Debug/1f3s1ag1/x86/CMakeFiles/edit_cache.dir
+/home/iwarifgha/Projects/park_app/android/app/.cxx/Debug/1f3s1ag1/x86/CMakeFiles/rebuild_cache.dir

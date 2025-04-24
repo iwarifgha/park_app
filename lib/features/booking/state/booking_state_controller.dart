@@ -1,11 +1,7 @@
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:park_app/core/services/api/booking_service.dart';
 
 import '../model/booking_model.dart';
-
-
-
 
 class BookingStateController extends GetxController {
   final BookingService _bookingRepository = BookingService();

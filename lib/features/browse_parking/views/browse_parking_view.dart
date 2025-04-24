@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class BrowseParkingView extends StatelessWidget {
   static const name = '/browse_parking';
@@ -6,6 +7,10 @@ class BrowseParkingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+    );
   }
 }

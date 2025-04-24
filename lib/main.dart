@@ -1,8 +1,8 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:park_app/core/common/nav_bar_widget.dart';
 import 'package:park_app/core/constants/env_constants.dart';
 import 'package:park_app/core/constants/hive_constants.dart';
 import 'package:park_app/features/booking/views/booking_view.dart';
@@ -13,9 +13,6 @@ import 'core/bindings/getx_bindings.dart';
 import 'core/helpers/hive_registerer.dart';
 import 'core/config/env/env.dart';
 import 'core/routes/routes.dart';
-import 'features/auth/model/user_model.dart';
-import 'features/booking/model/booking_model.dart';
-import 'features/browse_parking/model/parking_space_model.dart';
 import 'features/browse_parking/views/browse_parking_view.dart';
 
 void main() async {
@@ -41,8 +38,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Parking App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(0, 112, 70, 1))
-      ),
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromRGBO(0, 112, 70, 1))),
       initialBinding: GetBindings(), // Set initial bindings
       getPages: AppPages.routes, // Define routes
       debugShowCheckedModeBanner: false,
@@ -54,7 +51,7 @@ class MyApp extends StatelessWidget {
 class Base extends StatefulWidget {
   static const String name = '/base';
 
-  Base({super.key});
+  const Base({super.key});
 
   @override
   State<Base> createState() => _BaseState();
@@ -64,29 +61,63 @@ class _BaseState extends State<Base> {
   var selectedIndex = 0;
 
   final screens = <Widget>[
-    BrowseParkingView(),
     ProfileView(),
+    BrowseParkingView(),
     BookingView(),
   ];
+
+  switchBar(index) {
+    if (selectedIndex != index) {
+      if (mounted) {
+        setState(() {
+          selectedIndex = index;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[selectedIndex],
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        activeIndex: selectedIndex,
-        icons: [
-          Icons.person,
-          Icons.home,
-          Icons.car_rental
-        ],
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              selectedIndex = 1;
+            });
+          },
+          child: Icon(Icons.home_max_rounded)),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: NavBarWidget(
+              onTap: (int index) {
+                switchBar(index);
+              },
+              index: 0,
+              selectedIndex: selectedIndex,
+              icon: Icons.person_2_rounded,
+              name: 'Profile',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: NavBarWidget(
+              onTap: (int index) {
+                switchBar(index);
+              },
+              index: 2,
+              selectedIndex: selectedIndex,
+              icon: Icons.car_rental,
+              name: 'Bookings',
+            ),
+          ),
+        ]),
       ),
     );
   }
 }
-

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../services/api/img_service.dart';
@@ -16,8 +15,6 @@ class ImagePickerClass {
     return null;
   }
 }
-
-
 
 class UploadImageController extends GetxController {
   var imageFile = Rx<File?>(null);
@@ -40,4 +37,3 @@ class UploadImageController extends GetxController {
     }
   }
 }
-

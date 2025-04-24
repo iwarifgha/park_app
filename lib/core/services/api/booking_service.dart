@@ -31,7 +31,7 @@ class BookingService {
   }
 
   Future<List<Booking>> fetchUserBookings(String userId) async {
-    var cachedData = _localStorageService.getData('cached_parking_spaces');
+    var cachedData = _localStorageService.getData('user_bookings');
     if (cachedData != null) {
       return cachedData as List<Booking>;
     }
